@@ -6,3 +6,24 @@ import fastly
 
 fastly.pypi_search("requests") # "<!DOCTYPE html> <html lang=..." or "Failed to solve fastly check"
 ```
+# reversed algorithm (so easy)
+1. I checked console and I found the log "found answer: ..."<br>
+2. I put obfuscated code to https://deobfuscator.io and searched "found answer" in simplified code<br>
+3. I found the main code for PoW challenge:
+```js
+var t = function e(e, t) {
+    var n = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    for (var r = 0; r < n.length; r++) for (var i = 0; i < n.length; i++) {
+      var o = e + n[r] + n[i];
+      if ((0, eW.default)(o).toString() == t) return n[r] + n[i];
+    }
+    return "";
+  };
+  var n = function e(e) {
+    var n = e.base, r = e.expires, i = e.hmac, o = e.hash;
+    console.log("Challenge: ".concat(n, " => ").concat(o));
+    var a = t(n, o);
+    return console.log("found answer: ".concat(a)), {ty: "pow", base: n, answer: a, hmac: i, expires: r};
+  };
+```
+And i tried with some hash algorithm and SHA-256 was used by fastly.<br>
