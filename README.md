@@ -8,7 +8,7 @@ fastly.pypi_search("requests") # "<!DOCTYPE html> <html lang=..." or "Failed to 
 ```
 # reversed algorithm (so easy)
 1. I checked browser console and I found the log "found answer: ..."<br>
-2. I put obfuscated code to https://deobfuscator.io and searched "found answer" in simplified code<br>
+2. I put obfuscated code to https://deobfuscate.io and searched "found answer" in simplified code<br>
 3. I found the main code for PoW challenge:
 ```js
 var t = function e(e, t) {
